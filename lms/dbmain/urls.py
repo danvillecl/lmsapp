@@ -22,8 +22,7 @@ urlpatterns = [
     path('faq/<int:pk>/', views.FaqDetails.as_view()),
     path('ClassSchedule/', views.ClassScheduleList.as_view()),
     path('ClassSchedule/<int:pk>/', views.ClassScheduleDetails.as_view()),
-    path('QuizQAndA/', views.QuizQAndAList.as_view()),
-    path('QuizQAndA/<int:pk>/', views.QuizQAndADetails.as_view()),
-    path('quizes/', views.QuizesList.as_view()),
+    # path('quizes/', views.QuizesList.as_view()),
     path('quizes/<int:pk>/', views.QuizesDetails.as_view()),
+    path('instructor_login',views.instructor_login)
 ]

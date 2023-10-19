@@ -62,15 +62,15 @@ class ClassScheduleSerializer(serializers.ModelSerializer):
         fields = ['id', 'classTitle', 'description', 'fk_nstructor', 'fk_course', 'classDate', 'classTime', 'duration']
 
 # Serializer for QuizQAndA
-class QuizQAndASerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.QuizQAndA
-        fields = ['id', 'quizQuestion', 'quizAnswer', 'optionA', 'optionB', 'optionC']
+# class QuizQAndASerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = models.QuizQAndA
+#         fields = ['id', 'quizQuestion', 'quizAnswer', 'optionA', 'optionB', 'optionC']
 
 # Serailizer for Quizes
 class QuizesSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Quizes
-        fields = ['id', 'fk_quizQAndAID', 'title', 'maxScore', 'userScore', 'fk_course', 'fk_instructor', 'time', 'startDate', 'endDate']
+        fields = ['id','title', 'fk_course', 'fk_instructor', 'fk_student', ' quiz_url']
 
 

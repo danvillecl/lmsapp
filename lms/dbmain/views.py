@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from django.http import JsonResponse,HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+# from rest_framework import APIView
+from rest_framework.response import Response
+from rest_framework import permissions
 from . import models
 from . import serializers
 from rest_framework import generics
@@ -94,19 +99,37 @@ class ClassScheduleDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.ClassScheduleSerializer
 
 # Views for QuizQAndA
-class QuizQAndAList(generics.ListCreateAPIView):
-    queryset = models.QuizQAndA.objects.all()
-    serializer_class = serializers.QuizQAndASerializer
+# class QuizQAndAList(generics.ListCreateAPIView):
+#     queryset = models.QuizQAndA.objects.all()
+#     serializer_class = serializers.QuizQAndASerializer
 
-class QuizQAndADetails(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.QuizQAndA.objects.all()
-    serializer_class = serializers.QuizQAndASerializer
+# class QuizQAndADetails(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = models.QuizQAndA.objects.all()
+#     serializer_class = serializers.QuizQAndASerializer
 
-# Views for QuizQAndA
-class QuizesList(generics.ListCreateAPIView):
-    queryset = models.Quizes.objects.all()
-    serializer_class = serializers.QuizesSerializer
+# # Views for QuizQAndA
+# class QuizesList(generics.ListCreateAPIView):
+#     queryset = models.Quizes.objects.all()
+#     serializer_class = serializers.QuizesSerializer
 
 class QuizesDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Quizes.objects.all()
     serializer_class = serializers.QuizesSerializer
+
+# def instructor_login (request):
+#     email=request.POST['email']
+#     password = request.POST['password']
+#     instructorData=models.Instructor.objects.get(email=email,password=password)
+#     if instructorData:
+#         return JsonResponse({'bool':True})
+#     else:
+#         return JsonResponse({'bool':False})
+
+def instructor_login (request):
+    email = request.POST.get('email', '')
+    password = request.POST.get('password', '')
+    instructorData = models.Instructor.objects.filter(email=email, password=password)
+    if instructorData.exists():
+        return JsonResponse({'bool':True})
+    else:
+        return JsonResponse({'bool':False})
